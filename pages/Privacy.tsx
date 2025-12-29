@@ -1,9 +1,8 @@
-
 import React from 'react';
 
 const Privacy: React.FC = () => {
   return (
-    <div className="pt-20">
+    <div className="pt-32 lg:pt-40">
       <section className="py-32 px-6 lg:px-12 bg-white max-w-4xl mx-auto">
         <h1 className="text-4xl font-black mb-12">Privacy Policy</h1>
         <div className="prose prose-slate max-w-none space-y-8 text-slate-600 font-medium leading-relaxed">

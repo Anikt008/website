@@ -1,11 +1,10 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { CONTACT_INFO } from '../constants';
 
 const About: React.FC = () => {
   return (
-    <div className="pt-20">
+    <div className="pt-32 lg:pt-40">
       <section className="py-32 px-6 lg:px-12 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">

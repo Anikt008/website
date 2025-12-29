@@ -1,9 +1,54 @@
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, CheckCircle } from 'lucide-react';
 import { SERVICES } from '../constants';
+
+const heroImage = "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=1200";
+
+const TypingLine: React.FC = () => {
+  const words = [
+    "Expert Website Designer",
+    "UI/UX Specialist",
+    "Frontend Developer",
+    "Business Growth Partner"
+  ];
+  const [index, setIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentWord = words[index];
+    const speed = isDeleting ? 30 : 60;
+
+    const timeout = setTimeout(() => {
+      if (!isDeleting && displayText === currentWord) {
+        setTimeout(() => setIsDeleting(true), 1500);
+      } else if (isDeleting && displayText === "") {
+        setIsDeleting(false);
+        setIndex((prev) => (prev + 1) % words.length);
+      } else {
+        const nextText = isDeleting
+          ? currentWord.substring(0, displayText.length - 1)
+          : currentWord.substring(0, displayText.length + 1);
+        setDisplayText(nextText);
+      }
+    }, speed);
+
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, index]);
+
+  return (
+    <div className="h-8 flex items-center gap-1 text-lg font-medium text-slate-400">
+      <span>{displayText}</span>
+      <motion.span
+        animate={{ opacity: [0, 1, 0] }}
+        transition={{ repeat: Infinity, duration: 0.8 }}
+        className="inline-block w-[2px] h-5 bg-slate-900"
+      />
+    </div>
+  );
+};
 
 const Home: React.FC = () => {
   const containerVariants = {
@@ -11,59 +56,52 @@ const Home: React.FC = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
+        staggerChildren: 0.1,
         delayChildren: 0.2,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
   };
 
   return (
-    <div className="pt-20">
+    <div className="pt-32 lg:pt-40 overflow-x-hidden">
       {/* Hero Section */}
-      <section className="min-h-[90vh] flex items-center px-6 lg:px-12 py-16 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+      <section className="min-h-[80vh] flex items-center px-6 lg:px-20 bg-white">
+        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-16 items-center">
+          
+          {/* TEXT CONTENT */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="space-y-12"
+            className="space-y-10"
           >
             <div className="space-y-6">
-              <motion.span 
-                variants={itemVariants}
-                className="inline-block text-[11px] font-black uppercase tracking-[0.4em] text-slate-400"
-              >
-                Based in India — Working Globally
-              </motion.span>
               <motion.h1 
                 variants={itemVariants}
-                className="text-6xl lg:text-[7.5rem] font-black text-slate-900 leading-[0.9] tracking-tighter"
+                className="text-5xl lg:text-7xl font-bold tracking-tight text-slate-900 leading-[1.1]"
               >
-                Digital <br />
-                Craftsmanship <br />
-                <span className="text-slate-200 underline decoration-slate-100 underline-offset-[12px]">Redefined.</span>
+                Clean, Professional Websites
+                <span className="block text-slate-300">
+                  That Build Trust
+                </span>
               </motion.h1>
+
+              <motion.div variants={itemVariants}>
+                <TypingLine />
+              </motion.div>
+
               <motion.p 
                 variants={itemVariants}
-                className="text-xl lg:text-2xl text-slate-500 max-w-xl leading-relaxed font-medium"
+                className="text-xl text-slate-500 max-w-xl leading-relaxed font-medium"
               >
-                Aniket Kumar designs clean, high-performance websites for businesses and personal brands who demand excellence.
+                I specialize in creating high-performance digital experiences that help brands stand out and drive real business growth through minimalist, modern design.
               </motion.p>
             </div>
-            
-            <motion.div 
-              variants={itemVariants}
-              className="flex items-center gap-8 text-[11px] font-bold uppercase tracking-widest text-slate-400"
-            >
-              <span className="flex items-center gap-2"><CheckCircle size={14} className="text-slate-900" /> Professional</span>
-              <span className="flex items-center gap-2"><CheckCircle size={14} className="text-slate-900" /> Minimalist</span>
-              <span className="flex items-center gap-2"><CheckCircle size={14} className="text-slate-900" /> Reliable</span>
-            </motion.div>
 
             <motion.div 
               variants={itemVariants}
@@ -71,120 +109,101 @@ const Home: React.FC = () => {
             >
               <Link
                 to="/contact"
-                className="px-10 py-6 bg-slate-900 text-white text-lg font-bold rounded-2xl flex items-center justify-center gap-3 hover:bg-black transition-all hover:translate-y-[-2px] active:scale-95 shadow-2xl shadow-slate-200"
+                className="px-10 py-5 bg-slate-900 text-white text-lg font-bold rounded-2xl flex items-center justify-center gap-3 hover:bg-black transition-all hover:translate-y-[-2px] active:scale-95 shadow-xl shadow-slate-200"
               >
-                Start a project <ArrowRight size={22} />
+                Work with me <ArrowRight size={20} />
               </Link>
               <Link
                 to="/portfolio"
-                className="px-10 py-6 bg-white text-slate-900 border-2 border-slate-100 text-lg font-bold rounded-2xl flex items-center justify-center hover:bg-slate-50 transition-all"
+                className="px-10 py-5 bg-white text-slate-900 border-2 border-slate-100 text-lg font-bold rounded-2xl flex items-center justify-center hover:bg-slate-50 transition-all"
               >
-                View Works
+                See Portfolio
               </Link>
+            </motion.div>
+
+            <motion.div 
+              variants={itemVariants}
+              className="flex flex-wrap items-center gap-6 text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400"
+            >
+              <span className="flex items-center gap-2"><CheckCircle size={14} className="text-slate-900" /> UI Focus</span>
+              <span className="flex items-center gap-2"><CheckCircle size={14} className="text-slate-900" /> SEO Ready</span>
+              <span className="flex items-center gap-2"><CheckCircle size={14} className="text-slate-900" /> 100% Mobile Ready</span>
             </motion.div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 40, scale: 0.98 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
+          {/* IMAGE CONTENT */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
-            className="hidden lg:block relative"
+            className="flex justify-center lg:justify-end"
           >
-            <div className="aspect-[5/6] bg-slate-50 rounded-[4rem] overflow-hidden border border-slate-100 shadow-[0_60px_120px_-20px_rgba(0,0,0,0.08)]">
-              <img 
-                src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=1510" 
-                alt="Sophisticated web designer portfolio visual" 
-                className="w-full h-full object-cover grayscale opacity-90 mix-blend-multiply transition-transform duration-[2000ms] hover:scale-110"
-              />
-            </div>
-            <div className="absolute -bottom-12 -left-12 bg-white p-12 rounded-[3rem] shadow-2xl border border-slate-50 max-w-sm">
-              <div className="space-y-4">
-                <div className="w-12 h-1 bg-slate-900" />
-                <p className="text-slate-900 font-black text-3xl leading-none tracking-tighter">Clarity Above All.</p>
-                <p className="text-slate-400 text-sm font-semibold leading-relaxed uppercase tracking-wider">
-                  I help high-value brands find their voice through minimalist and meaningful digital experiences.
-                </p>
-              </div>
-            </div>
+            <img
+              src={heroImage}
+              alt="Professional website designer"
+              className="
+                w-full
+                max-w-[520px]
+                rounded-2xl
+                object-cover
+                shadow-2xl
+              "
+            />
           </motion.div>
+
         </div>
       </section>
 
-      {/* Philosophy Section */}
-      <section className="py-40 px-6 lg:px-12 bg-slate-50">
+      {/* Services Preview Section */}
+      <section className="py-32 px-6 lg:px-20 bg-slate-50">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-end mb-32">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="space-y-6"
-            >
-              <h2 className="text-5xl lg:text-7xl font-black tracking-tighter text-slate-900">Expertise & <br />Approach</h2>
-              <p className="text-xl text-slate-500 font-medium leading-relaxed max-w-md">
-                Focused on delivering results through design systems that scale and layouts that convert.
-              </p>
-            </motion.div>
-            <div className="flex justify-end">
-              <Link to="/services" className="group flex items-center gap-4 text-slate-900 font-black text-xl hover:gap-6 transition-all duration-300">
-                Explore all services <ArrowUpRight className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-              </Link>
-            </div>
+          <div className="mb-20 space-y-4 text-center lg:text-left">
+            <h2 className="text-4xl lg:text-5xl font-black tracking-tight text-slate-900">Services</h2>
+            <p className="text-xl text-slate-500 font-medium max-w-2xl">Premium solutions for serious brands.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {SERVICES.map((service, idx) => (
               <motion.div
                 key={service.id}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: idx * 0.1 }}
-                className="bg-white p-16 rounded-[3rem] border border-slate-100 shadow-sm hover:shadow-[0_50px_100px_-20px_rgba(0,0,0,0.08)] hover:translate-y-[-16px] transition-all duration-700 group"
+                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                className="bg-white p-12 rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500 group"
               >
-                <div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-900 mb-12 group-hover:bg-slate-900 group-hover:text-white transition-all duration-700">
-                   <span className="font-black text-xl">0{idx + 1}</span>
+                <div className="w-14 h-14 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-900 mb-8 group-hover:bg-slate-900 group-hover:text-white transition-all duration-500">
+                   <span className="font-bold">0{idx + 1}</span>
                 </div>
-                <h3 className="text-3xl font-black mb-6 tracking-tight">{service.title}</h3>
-                <p className="text-slate-500 text-lg leading-relaxed font-medium">{service.description}</p>
+                <h3 className="text-2xl font-black mb-4 tracking-tight">{service.title}</h3>
+                <p className="text-slate-500 font-medium leading-relaxed">{service.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Big Link Section */}
-      <section className="py-60 px-6 lg:px-12 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto text-center space-y-20">
-          <motion.h2 
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-6xl lg:text-[10rem] font-black text-slate-900 tracking-tighter leading-[0.8]"
-          >
-            LET'S BUILD <br />
-            SOMETHING <br />
-            <span className="text-slate-200">ICONIC.</span>
-          </motion.h2>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <Link 
-              to="/contact" 
-              className="inline-flex items-center gap-6 group"
-            >
-              <div className="w-24 h-24 rounded-full border-2 border-slate-900 flex items-center justify-center group-hover:bg-slate-900 group-hover:text-white transition-all duration-500 transform group-hover:scale-110">
-                <ArrowRight size={40} className="transform group-hover:rotate-[-45deg] transition-transform duration-500" />
-              </div>
-              <span className="text-3xl font-black tracking-tight border-b-4 border-transparent group-hover:border-slate-900 transition-all duration-500 pb-2">Get in touch</span>
-            </Link>
-          </motion.div>
+      {/* Call to Action Section */}
+      <section className="py-40 px-6 lg:px-20 bg-white">
+        <div className="max-w-7xl mx-auto bg-slate-900 rounded-[3.5rem] p-12 lg:p-24 relative overflow-hidden">
+          <div className="relative z-10 flex flex-col items-center text-center space-y-10">
+            <h2 className="text-5xl lg:text-7xl font-black text-white tracking-tighter leading-tight">
+              Let's create something <br /> remarkable together.
+            </h2>
+            <p className="text-slate-400 text-xl lg:text-2xl max-w-xl font-medium">
+              Join dozens of satisfied clients who have elevated their business with a custom-designed website.
+            </p>
+            <div className="pt-4">
+              <Link 
+                to="/contact" 
+                className="inline-flex items-center gap-4 px-14 py-7 bg-white text-slate-900 text-xl font-black rounded-3xl hover:bg-slate-100 transition-all hover:scale-105 active:scale-95 shadow-2xl"
+              >
+                Get Started Now <ArrowRight size={24} />
+              </Link>
+            </div>
+          </div>
+          <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -mr-48 -mt-48 blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-slate-800/20 rounded-full -ml-48 -mb-48 blur-3xl" />
         </div>
       </section>
     </div>

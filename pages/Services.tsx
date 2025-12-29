@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { SERVICES } from '../constants';
@@ -9,7 +8,7 @@ const Services: React.FC = () => {
   const icons = [<Layout size={32} />, <User size={32} />, <Layers size={32} />];
 
   return (
-    <div className="pt-20">
+    <div className="pt-32 lg:pt-40">
       <section className="py-32 px-6 lg:px-12 bg-white">
         <div className="max-w-7xl mx-auto">
           <motion.div
