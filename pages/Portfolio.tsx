@@ -3,10 +3,16 @@ import { motion } from 'framer-motion';
 import { PROJECTS } from '../constants';
 import { ExternalLink, ArrowRight, Minus } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 const Portfolio: React.FC = () => {
   return (
     <div className="pt-32 lg:pt-40">
+      <SEO 
+        title="Our Portfolio" 
+        description="View the latest website design projects by Aniket Kumar. A showcase of modern, clean, and professional digital experiences created for various industries."
+        path="/portfolio"
+      />
       <section className="py-32 px-6 lg:px-12 bg-white">
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -41,7 +47,7 @@ const Portfolio: React.FC = () => {
                   <div className="aspect-[4/5] overflow-hidden bg-slate-50 relative">
                     <img
                       src={project.imageUrl}
-                      alt={project.title}
+                      alt={`${project.title} - Website Design Project by Aniket Kumar`}
                       className="w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 scale-100 group-hover:scale-105 transition-all duration-[1000ms] ease-[0.16,1,0.3,1]"
                     />
                     

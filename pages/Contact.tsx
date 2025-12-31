@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, MessageCircle, MapPin, ArrowRight, Send } from 'lucide-react';
 import { CONTACT_INFO } from '../constants';
+import SEO from '../components/SEO';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -18,6 +19,11 @@ const Contact: React.FC = () => {
 
   return (
     <div className="pt-32 lg:pt-40">
+      <SEO 
+        title="Contact Aniket Kumar" 
+        description="Get in touch with Aniket Kumar for your next web design project. Available for inquiries via email, WhatsApp, or the contact form."
+        path="/contact"
+      />
       <section className="py-32 px-6 lg:px-12 bg-white">
         <div className="max-w-7xl mx-auto">
           <motion.div

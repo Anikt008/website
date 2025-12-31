@@ -1,10 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { CONTACT_INFO } from '../constants';
+import SEO from '../components/SEO';
 
 const About: React.FC = () => {
   return (
     <div className="pt-32 lg:pt-40">
+      <SEO 
+        title="About Aniket Kumar" 
+        description="Learn more about Aniket Kumar, a professional website designer from India. Discover my design philosophy and approach to building premium digital experiences."
+        path="/about"
+      />
       <section className="py-32 px-6 lg:px-12 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">

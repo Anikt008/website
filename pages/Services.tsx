@@ -3,12 +3,18 @@ import { motion } from 'framer-motion';
 import { SERVICES } from '../constants';
 import { Layout, User, Layers, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 const Services: React.FC = () => {
   const icons = [<Layout size={32} />, <User size={32} />, <Layers size={32} />];
 
   return (
     <div className="pt-32 lg:pt-40">
+      <SEO 
+        title="Our Services" 
+        description="Explore the range of professional website design services offered by Aniket Kumar. From business landing pages to personal branding and UI layout design."
+        path="/services"
+      />
       <section className="py-32 px-6 lg:px-12 bg-white">
         <div className="max-w-7xl mx-auto">
           <motion.div

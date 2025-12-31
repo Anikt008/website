@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { NavLink, Service, Project } from './types';
 import { Layout, User, Layers } from 'lucide-react';
@@ -38,7 +37,7 @@ export const PROJECTS: Project[] = [
     title: 'Modern Corporate Identity',
     category: 'Business Website',
     description: 'A minimal and high-conversion landing page for a tech consultancy.',
-    imageUrl: 'https://picsum.photos/seed/p1/800/600',
+    imageUrl: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=800',
     isDemo: true,
   },
   {
@@ -46,7 +45,7 @@ export const PROJECTS: Project[] = [
     title: 'Creative Portfolio Concept',
     category: 'Personal Brand',
     description: 'A refined gallery-style layout focused on visual storytelling.',
-    imageUrl: 'https://picsum.photos/seed/p2/800/600',
+    imageUrl: 'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?auto=format&fit=crop&q=80&w=800',
     isDemo: true,
   },
   {
@@ -54,7 +53,7 @@ export const PROJECTS: Project[] = [
     title: 'E-commerce UI Kit',
     category: 'UI Layout',
     description: 'Structured, clean, and accessible design system for retail brands.',
-    imageUrl: 'https://picsum.photos/seed/p3/800/600',
+    imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800',
     isDemo: true,
   },
 ];
