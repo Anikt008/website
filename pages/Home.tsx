@@ -5,8 +5,8 @@ import { ArrowRight, CheckCircle, Minus } from 'lucide-react';
 import { SERVICES } from '../constants';
 import SEO from '../components/SEO';
 
-// The definitive high-quality silhouette image that defines the "Aniket Kumar" vision
-const heroImage = "https://images.unsplash.com/photo-1483450388369-9ed95738483c?auto=format&fit=crop&q=80&w=1200";
+// Premium professional workspace image representing "Work"
+const heroImage = "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=1200";
 
 const TypingLine: React.FC = () => {
   const words = [
@@ -160,7 +160,7 @@ const Home: React.FC = () => {
             <div className="relative aspect-[4/5] w-full max-w-[580px] mx-auto overflow-hidden rounded-[3rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] bg-slate-100 group">
               <img
                 src={heroImage}
-                alt="Visionary Portfolio Image - Aniket Kumar"
+                alt="Professional Design Work Environment - Aniket Kumar Portfolio"
                 className="w-full h-full object-cover grayscale brightness-90 group-hover:scale-105 transition-transform duration-[2000ms] ease-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-60" />
